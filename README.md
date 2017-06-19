@@ -2,6 +2,11 @@
 
 Sistema de Eventos encomendado pela Morena.
 
+[![Build Status](https://travis-ci.org/ricardopimentel/wttd.svg?branch=master)](https://travis-ci.org/ricardopimentel/wttd)
+[![Code Health](https://landscape.io/github/ricardopimentel/wttd/master/landscape.svg?style=flat)](https://landscape.io/github/ricardopimentel/wttd/master)
+
+
+
 ## Como desenvolver?
 
 1. Clone o repositório.
