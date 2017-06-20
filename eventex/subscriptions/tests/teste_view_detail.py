@@ -36,5 +36,5 @@ class SubscriptionDetailGet(TestCase):
 
 class SubscriptionDetailNotFound(TestCase):
     def test_not_found(self):
-        resp = self.clinet.get('/inscricao/0/')
+        resp = self.client.get('/inscricao/0/')
         self.assertEqual(404, resp.status_code)
