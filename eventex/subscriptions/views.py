@@ -3,7 +3,6 @@ from django.core import mail
 from django.http.response import HttpResponseRedirect, Http404
 from django.shortcuts import render, resolve_url as r
 from django.template.loader import render_to_string
-from django.contrib import messages
 
 from eventex.subscriptions.forms import SubscriptionForm
 from eventex.subscriptions.models import Subscription
