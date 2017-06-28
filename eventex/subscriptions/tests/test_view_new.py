@@ -41,7 +41,7 @@ class SubscriptionNewGet(TestCase):
 
 class SubscriptionNewPostValid(TestCase):
     def setUp(self):
-        data = dict(name='Ricardo', cpf='123', email='ricardo@gmail.com', phone='123')
+        data = dict(name='Ricardo', cpf='12345678901', email='ricardo@gmail.com', phone='123')
         self.resp = self.client.post(r('subscriptions:new'), data)
 
     def test_post(self):
