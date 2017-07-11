@@ -8,7 +8,7 @@ class ContactModelTest(TestCase):
         self.speaker = Speaker.objects.create(
             name="Ricardo",
             slug="ricardo",
-            photo='https://www.google.com.br/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwi8zrH2oOTUAhVCkZAKHfH6DsIQjRwIBw&url=https%3A%2F%2Fwww.youtube.com%2Fuser%2Flendonkartter&psig=AFQjCNEWAdCgaP61Cjo0eoZ9G6l_AKjB5Q&ust=1498866904131995'
+            photo='https://yt3.ggpht.com/-X29yPlgJe9g/AAAAAAAAAAI/AAAAAAAAAAA/8nl_Feaiaag/s100-c-k-no-mo-rj-c0xffffff/photo.jpg'
         )
 
 
