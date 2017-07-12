@@ -14,10 +14,8 @@ def speaker_detail(request, slug):
 
 
 def talk_list(response):
-
     context = {
         'morning_talks': Talk.objects.at_morning(),
         'afternoon_talks': Talk.objects.at_afternoon(),
-        'courses': Course.objects.all(),
        }
     return render(response, 'core/talk_list.html', context)
