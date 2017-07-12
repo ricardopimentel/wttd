@@ -1,51 +1,23 @@
-from django.conf import settings
-from django.core import mail
-from django.http.response import HttpResponseRedirect, Http404
-from django.shortcuts import render, resolve_url as r
-from django.template.loader import render_to_string
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView
 
 from eventex.subscriptions.forms import SubscriptionForm
+from eventex.subscriptions.mixins import EmailCreateMixin
 from eventex.subscriptions.models import Subscription
 
 
-def new(request):
-    if request.method == 'POST':
-        return create(request)
-    return empty_form(request)
+class EmailCreateView(EmailCreateMixin, CreateView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.send_mail()
+        return response
 
 
-def empty_form(request):
-    return render(request, 'subscriptions/subscription_form.html', {'form': SubscriptionForm()})
+new = EmailCreateView.as_view(model=Subscription,
+                              form_class=SubscriptionForm,
+                              email_subject='Confirmação de inscrição')
 
 
-def create(request):
-    form = SubscriptionForm(request.POST)
-    if not form.is_valid():
-        return render(request, 'subscriptions/subscription_form.html', {'form': form})
+detail = DetailView.as_view(model=Subscription)
 
-    # Send email
-    subscription = Subscription.objects.create(**form.cleaned_data)
-
-    _send_email('Confirmação de inscrição',
-                settings.DEFAULT_FROM_EMAIL,
-                subscription.email,
-                'subscriptions/subscription_email.txt',
-                {'subscription': subscription})
-
-    return HttpResponseRedirect(r('subscriptions:detail', subscription.pk))
-
-
-def detail(request, pk):
-    try:
-        subscription = Subscription.objects.get(pk=pk)
-    except Subscription.DoesNotExist:
-        raise Http404
-
-    return render(request, 'subscriptions/subscription_detail.html',
-                  {'subscription': subscription})
-
-
-def _send_email(subject, from_, to, template_name, context):
-    body = render_to_string(template_name, context)
-    mail.send_mail(subject, body, from_, [from_, to])
 
